@@ -33,9 +33,10 @@ class UserService
             return new ResultService(false,$exception->getMessage());
         }
     }
-    public function updateUser($data,$user){
+    public function updateUser($data,User $user){
         try {
-            return new ResultService(true,$user->update($data));
+            $user->update($data);
+            return new ResultService(true,$user);
         }
         catch (\Throwable $exception) {
             return new ResultService(false,$exception->getMessage());

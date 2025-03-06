@@ -31,7 +31,18 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $result=$this->userService->storeUser($request->validated());
-        return (new ApiResponseBuilder())->message('user added successfully')->data([$result])->get()->response();
+/*        $apiResponse=(new ApiResponseBuilder())->data([$result->data]);
+        $result->success?$apiResponse->message('user added successfully'):$apiResponse->message('user added unsuccessfully');
+        return $apiResponse->get()->response();*/
+
+/*        return $result->success?
+            (new ApiResponseBuilder())->message('user added successfully')->data([$result->data])->get()->response():
+            (new ApiResponseBuilder())->message('user added unsuccessfully')->data([$result->data])->get()->response();*/
+
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('user added successfully'):
+            (new ApiResponseBuilder())->message('user added unsuccessfully');
+        return $apiResponse->data([$result->data])->get()->response();
     }
 
     /**
