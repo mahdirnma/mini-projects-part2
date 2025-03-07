@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 
 class UserService
@@ -12,15 +13,21 @@ class UserService
             return User::where('is_active',1)->get();
         });
     }
-    public function addUser($user){
+    public function addUser(User $user){
         return app(TryService::class)(function () use ($user){
-            return User::createe($user);
+            return User::create($user);
         });
     }
 
-    public function showUser($user)
+    public function showUser(User $user)
     {
         return app(TryService::class)(function () use ($user){
+            return $user;
+        });
+    }
+    public function updateUser($data,User $user){
+        return app(TryService::class)(function () use ($data,$user){
+            $user->update($data);
             return $user;
         });
     }
