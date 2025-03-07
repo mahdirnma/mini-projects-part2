@@ -22,4 +22,11 @@ class TagService
             return $tag;
         });
     }
+    public function updateTag($data,Tag $tag){
+        return app(TryService::class)(function () use ($data,$tag){
+            $tag->update($data);
+            return $tag;
+        });
+    }
+
 }

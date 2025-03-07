@@ -57,7 +57,6 @@ class UserController extends Controller
             (new ApiResponseBuilder())->message('user updated successfully'):
             (new ApiResponseBuilder())->message('user updated unsuccessfully');
         return $apiResponse->data($result->data)->response();
-
     }
 
     /**

@@ -2,16 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
+use Spatie\FlareClient\Api;
 
-class UpdateTagRequest extends FormRequest
+class UpdateTagRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,7 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            Tag::$rules
         ];
     }
 }
