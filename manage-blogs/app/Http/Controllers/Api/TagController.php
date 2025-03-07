@@ -4,16 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
+use App\Services\ApiResponseBuilder;
+use App\Services\TagService;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(public TagService $tagService)
+    {
+    }
+
     public function index()
     {
-        //
+        $result=$this->tagService->getTags();
+        return (new ApiResponseBuilder())->data($result->data)->response();
     }
 
     /**
