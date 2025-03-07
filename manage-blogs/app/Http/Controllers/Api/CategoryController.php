@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use App\Services\ApiResponseBuilder;
 use App\Services\CategoryService;
@@ -26,9 +27,14 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $result=$this->categoryService->addCategory($request->all());
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('category added successfully'):
+            (new ApiResponseBuilder())->message('category added unsuccessfully');
+        return $apiResponse->data($result->data)->response();
+
     }
 
     /**
