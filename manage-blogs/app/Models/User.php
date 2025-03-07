@@ -36,7 +36,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public static $rules=[
+        'name' => 'required|string|max:255',
+    ];
     /**
      * The attributes that should be cast.
      *
