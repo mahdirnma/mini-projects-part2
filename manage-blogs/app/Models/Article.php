@@ -16,6 +16,11 @@ class Article extends Model
         'category_id',
         'is_active',
     ];
+/*    public static $rules = [
+        'title' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+    ];*/
+
     public function category()
     {
         return $this->belongsTo(Category::class);

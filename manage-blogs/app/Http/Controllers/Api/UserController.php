@@ -32,7 +32,6 @@ class UserController extends Controller
             (new ApiResponseBuilder())->message('user added successfully'):
             (new ApiResponseBuilder())->message('user added unsuccessfully');
         return $apiResponse->data($result->data)->response();
-
     }
 
     /**

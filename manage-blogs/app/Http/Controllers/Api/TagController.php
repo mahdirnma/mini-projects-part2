@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
 use App\Services\ApiResponseBuilder;
 use App\Services\TagService;
@@ -23,9 +24,13 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTagRequest $request)
     {
-        //
+        $result=$this->tagService->addTag($request->validated());
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag added successfully'):
+            (new ApiResponseBuilder())->message('tag added unsuccessfully');
+        return $apiResponse->data($result->data)->response();
     }
 
     /**
@@ -33,7 +38,12 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $result=$this->tagService->showTag($tag);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag showed successfully'):
+            (new ApiResponseBuilder())->message('tag showed unsuccessfully');
+        return $apiResponse->data($result->data)->response();
+
     }
 
     /**

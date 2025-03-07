@@ -13,6 +13,10 @@ class Category extends Model
         'description',
         'is_active',
     ];
+    public static $rules = [
+        'title' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+    ];
     public function articles()
     {
         return $this->hasMany(Article::class);
