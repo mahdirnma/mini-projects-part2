@@ -44,7 +44,6 @@ class TagController extends Controller
             (new ApiResponseBuilder())->message('tag showed successfully'):
             (new ApiResponseBuilder())->message('tag showed unsuccessfully');
         return $apiResponse->data($result->data)->response();
-
     }
 
     /**
