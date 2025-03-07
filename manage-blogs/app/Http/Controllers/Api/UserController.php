@@ -39,7 +39,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $result=$this->userService->showUser($user);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('user showed successfully'):
+            (new ApiResponseBuilder())->message('user showed unsuccessfully');
+        return $apiResponse->data($result->data)->response();
+
     }
 
     /**

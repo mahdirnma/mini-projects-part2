@@ -17,4 +17,11 @@ class UserService
             return User::createe($user);
         });
     }
+
+    public function showUser($user)
+    {
+        return app(TryService::class)(function () use ($user){
+            return $user;
+        });
+    }
 }
