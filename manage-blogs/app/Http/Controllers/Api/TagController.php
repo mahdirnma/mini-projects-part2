@@ -65,6 +65,10 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $result=$this->tagService->deleteTag($tag);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag deleted successfully'):
+            (new ApiResponseBuilder())->message('tag deleted unsuccessfully');
+        return $apiResponse->response();
     }
 }

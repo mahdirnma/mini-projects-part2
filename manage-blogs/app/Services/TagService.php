@@ -28,5 +28,11 @@ class TagService
             return $tag;
         });
     }
+    public function deleteTag(Tag $tag){
+        return app(TryService::class)(function () use ($tag){
+            $tag->update(['is_active'=>0]);
+            return $tag;
+        });
+    }
 
 }
