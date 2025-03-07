@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Services\ApiResponseBuilder;
+use App\Services\ArticleService;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -11,9 +13,14 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(public ArticleService $articleService)
+    {
+    }
+
     public function index()
     {
-        //
+        $result=$this->articleService->getArticles();
+        return (new ApiResponseBuilder())->data($result->data)->response();
     }
 
     /**
