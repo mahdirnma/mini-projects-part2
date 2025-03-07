@@ -56,7 +56,6 @@ class TagController extends Controller
             (new ApiResponseBuilder())->message('tag updated successfully'):
             (new ApiResponseBuilder())->message('tag updated unsuccessfully');
         return $apiResponse->data($result->data)->response();
-
     }
 
     /**

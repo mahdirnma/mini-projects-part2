@@ -24,6 +24,12 @@ class CategoryService
         return app(TryService::class)(function () use ($category){
             return $category;
         });
+    }
+    public function updateCategory($data,Category $category){
+        return app(TryService::class)(function () use ($data,$category){
+            $category->update($data);
+            return $category;
+        });
 
     }
 }
