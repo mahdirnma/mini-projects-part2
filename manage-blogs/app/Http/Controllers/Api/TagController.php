@@ -26,7 +26,7 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        $result=$this->tagService->addTag($request->validated());
+        $result=$this->tagService->addTag($request->all());
         $apiResponse=$result->success?
             (new ApiResponseBuilder())->message('tag added successfully'):
             (new ApiResponseBuilder())->message('tag added unsuccessfully');
