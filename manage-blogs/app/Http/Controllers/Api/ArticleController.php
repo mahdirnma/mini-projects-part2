@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
 use App\Services\ApiResponseBuilder;
 use App\Services\ArticleService;
@@ -26,9 +27,14 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        //
+        $result=$this->articleService->addArticle($request->all());
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('article added successfully'):
+            (new ApiResponseBuilder())->message('article added unsuccessfully');
+        return $apiResponse->data($result->data)->response();
+
     }
 
     /**
@@ -36,7 +42,12 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $result=$this->articleService->showArticle($article);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('article showed successfully'):
+            (new ApiResponseBuilder())->message('article showed unsuccessfully');
+        return $apiResponse->data($result->data)->response();
+
     }
 
     /**
@@ -52,6 +63,11 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $result=$this->articleService->deleteArticle($article);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('article deleted successfully'):
+            (new ApiResponseBuilder())->message('article deleted unsuccessfully');
+        return $apiResponse->response();
+
     }
 }

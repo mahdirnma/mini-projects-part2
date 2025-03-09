@@ -16,10 +16,13 @@ class Article extends Model
         'category_id',
         'is_active',
     ];
-/*    public static $rules = [
+    public static $rules = [
         'title' => 'required|string|max:255',
         'description' => 'required|string|max:255',
-    ];*/
+        'user_id' => 'required|integer',
+        'category_id' => 'required|integer',
+        'tag_ids' => 'required|array',
+    ];
 
     public function category()
     {
