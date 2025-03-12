@@ -31,6 +31,7 @@ class Article extends Model
         'description' => 'required|string|max:255',
         'category_id' => 'required|numeric',
         'user_id' => 'required|numeric',
+        'tag_ids' => 'required|string',
     ];
 
 }
