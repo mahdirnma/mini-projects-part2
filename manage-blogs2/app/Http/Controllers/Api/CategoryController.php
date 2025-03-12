@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $result=$this->categoryService->getCategory();
+        $result=$this->categoryService->getCategories();
         return (new ApiResponseBuilder())->data(CategoryResource::collection($result->data))->response();
     }
 

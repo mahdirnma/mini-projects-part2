@@ -18,13 +18,12 @@ class TagController extends Controller
     public function __construct(public TagService $tagService)
     {
     }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $result=$this->tagService->getTag();
+        $result=$this->tagService->getTags();
         return (new ApiResponseBuilder())->data(TagResource::collection($result->data))->response();
     }
     /**
