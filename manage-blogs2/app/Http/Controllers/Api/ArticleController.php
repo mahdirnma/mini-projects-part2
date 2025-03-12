@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Services\ApiResponseBuilder;
@@ -51,9 +52,14 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        $result=$this->articleService->updateArticle($request->all(),$article);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag updated successfully')->data(new ArticleResource($result->data)):
+            (new ApiResponseBuilder())->message('tag updated unsuccessfully')->data($result->data);
+        return $apiResponse->response();
+
     }
 
     /**

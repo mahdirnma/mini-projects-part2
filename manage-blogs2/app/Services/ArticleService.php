@@ -31,4 +31,17 @@ class ArticleService
             return $article;
         });
     }
+    public function updateArticle($request,Article $article){
+        return app(TryService::class)(function () use ($request,$article){
+            $article->update([
+                'title'=>$request['title'],
+                'description'=>$request['description'],
+                'category_id'=>$request['category_id'],
+                'user_id'=>$request['user_id'],
+            ]);
+            $article->tags()->sync(json_decode($request['tag_ids']));
+            return $article;
+        });
+    }
+
 }
