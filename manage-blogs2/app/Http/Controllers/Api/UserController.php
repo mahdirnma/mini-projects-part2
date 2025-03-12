@@ -31,11 +31,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $result=$this->userService->addUser($request->validated());
-        $apiResult=$result->success?
+        $apiResponse=$result->success?
             (new ApiResponseBuilder())->message('user added successfully')->data(new UserResource($result->data)):
             (new ApiResponseBuilder())->message('user added unsuccessfully')->data($result->data);
-        return $apiResult->response();
-
+        return $apiResponse->response();
     }
 
     /**
@@ -43,7 +42,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $result=$this->userService->showUser($user);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('user showed successfully')->data(new UserResource($result->data)):
+            (new ApiResponseBuilder())->message('user showed unsuccessfully')->data($result->data);
+        return $apiResponse->response();
     }
 
     /**

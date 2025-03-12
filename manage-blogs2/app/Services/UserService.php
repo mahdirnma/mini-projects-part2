@@ -19,4 +19,11 @@ class UserService
             return User::create($user);
         });
     }
+
+    public function showUser(User $user)
+    {
+        return app(TryService::class)(function () use ($user){
+            return $user;
+        });
+    }
 }
