@@ -32,4 +32,9 @@ class UserService
             return $user;
         });
     }
+    public function deleteUser(User $user){
+        return app(TryService::class)(function () use ($user){
+            return $user->update(['is_active' => 0]);
+        });
+    }
 }
