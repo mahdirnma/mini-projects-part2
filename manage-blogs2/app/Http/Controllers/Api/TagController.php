@@ -45,12 +45,11 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $result=$this->tagService->showUser($tag);
+        $result=$this->tagService->showTag($tag);
         $apiResponse=$result->success?
             (new ApiResponseBuilder())->message('tag showed successfully')->data(new TagResource($result->data)):
             (new ApiResponseBuilder())->message('tag showed unsuccessfully')->data($result->data);
         return $apiResponse->response();
-
     }
 
     /**
@@ -58,7 +57,12 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $result=$this->tagService->updateTag($request->all(),$tag);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag updated successfully')->data(new TagResource($result->data)):
+            (new ApiResponseBuilder())->message('tag updated unsuccessfully')->data($result->data);
+        return $apiResponse->response();
+
     }
 
     /**
