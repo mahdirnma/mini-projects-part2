@@ -40,7 +40,12 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $result=$this->articleService->showArticle($article);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag showed successfully')->data(new ArticleResource($result->data)):
+            (new ApiResponseBuilder())->message('tag showed unsuccessfully')->data($result->data);
+        return $apiResponse->response();
+
     }
 
     /**

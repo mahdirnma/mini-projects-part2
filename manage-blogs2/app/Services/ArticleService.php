@@ -25,5 +25,10 @@ class ArticleService
             return $status;
         });
     }
-
+    public function showArticle(Article $article)
+    {
+        return app(TryService::class)(function () use ($article){
+            return $article;
+        });
+    }
 }
