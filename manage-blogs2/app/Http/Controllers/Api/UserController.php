@@ -3,17 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\ApiResponseBuilder;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct(public UserService $userService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $result=$this->userService->getUsers();
+        return (new ApiResponseBuilder())->data(UserResource::collection($result->data))->response();
     }
 
     /**
