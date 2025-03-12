@@ -43,5 +43,11 @@ class ArticleService
             return $article;
         });
     }
+    public function deleteArticle(Article $article){
+        return app(TryService::class)(function () use ($article){
+            return $article->update(['is_active' => 0]);
+        });
+    }
+
 
 }

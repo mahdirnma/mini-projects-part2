@@ -70,8 +70,8 @@ class TagController extends Controller
     {
         $result=$this->tagService->deleteTag($tag);
         $apiResponse=$result->success?
-            (new ApiResponseBuilder())->message('user deleted successfully'):
-            (new ApiResponseBuilder())->message('user deleted unsuccessfully');
+            (new ApiResponseBuilder())->message('tag deleted successfully'):
+            (new ApiResponseBuilder())->message('tag deleted unsuccessfully');
         return $apiResponse->response();
     }
 }

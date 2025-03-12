@@ -43,8 +43,8 @@ class ArticleController extends Controller
     {
         $result=$this->articleService->showArticle($article);
         $apiResponse=$result->success?
-            (new ApiResponseBuilder())->message('tag showed successfully')->data(new ArticleResource($result->data)):
-            (new ApiResponseBuilder())->message('tag showed unsuccessfully')->data($result->data);
+            (new ApiResponseBuilder())->message('article showed successfully')->data(new ArticleResource($result->data)):
+            (new ApiResponseBuilder())->message('article showed unsuccessfully')->data($result->data);
         return $apiResponse->response();
 
     }
@@ -56,8 +56,8 @@ class ArticleController extends Controller
     {
         $result=$this->articleService->updateArticle($request->all(),$article);
         $apiResponse=$result->success?
-            (new ApiResponseBuilder())->message('tag updated successfully')->data(new ArticleResource($result->data)):
-            (new ApiResponseBuilder())->message('tag updated unsuccessfully')->data($result->data);
+            (new ApiResponseBuilder())->message('article updated successfully')->data(new ArticleResource($result->data)):
+            (new ApiResponseBuilder())->message('article updated unsuccessfully')->data($result->data);
         return $apiResponse->response();
 
     }
@@ -67,6 +67,11 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $result=$this->articleService->deleteArticle($article);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('article deleted successfully'):
+            (new ApiResponseBuilder())->message('article deleted unsuccessfully');
+        return $apiResponse->response();
+
     }
 }
