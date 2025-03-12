@@ -45,7 +45,12 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $result=$this->tagService->showUser($tag);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('tag showed successfully')->data(new TagResource($result->data)):
+            (new ApiResponseBuilder())->message('tag showed unsuccessfully')->data($result->data);
+        return $apiResponse->response();
+
     }
 
     /**

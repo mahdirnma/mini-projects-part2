@@ -18,4 +18,11 @@ class TagService
             return Tag::create($tag);
         });
     }
+    public function showUser(Tag $tag)
+    {
+        return app(TryService::class)(function () use ($tag){
+            return $tag;
+        });
+    }
+
 }
