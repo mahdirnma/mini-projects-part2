@@ -32,8 +32,8 @@ class CategoryController extends Controller
     {
         $result=$this->categoryService->addCategory($request->all());
         $apiResponse=$result->success?
-            (new ApiResponseBuilder())->message('tag added successfully')->data(new CategoryResource($result->data)):
-            (new ApiResponseBuilder())->message('tag added unsuccessfully')->data($result->data);
+            (new ApiResponseBuilder())->message('category added successfully')->data(new CategoryResource($result->data)):
+            (new ApiResponseBuilder())->message('category added unsuccessfully')->data($result->data);
         return $apiResponse->response();
 
     }
@@ -45,10 +45,9 @@ class CategoryController extends Controller
     {
         $result=$this->categoryService->showCategory($category);
         $apiResponse=$result->success?
-            (new ApiResponseBuilder())->message('tag showed successfully')->data(new CategoryResource($result->data)):
-            (new ApiResponseBuilder())->message('tag showed unsuccessfully')->data($result->data);
+            (new ApiResponseBuilder())->message('category showed successfully')->data(new CategoryResource($result->data)):
+            (new ApiResponseBuilder())->message('category showed unsuccessfully')->data($result->data);
         return $apiResponse->response();
-
     }
 
     /**
@@ -56,7 +55,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $result=$this->categoryService->updateCategory($request->all(),$category);
+        $apiResponse=$result->success?
+            (new ApiResponseBuilder())->message('category updated successfully')->data(new CategoryResource($result->data)):
+            (new ApiResponseBuilder())->message('category updated unsuccessfully')->data($result->data);
+        return $apiResponse->response();
+
     }
 
     /**
