@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_active',
     ];
 
     /**
@@ -28,6 +29,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public static $rules = [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:3',
+    ];
     protected $hidden = [
         'password',
         'remember_token',
