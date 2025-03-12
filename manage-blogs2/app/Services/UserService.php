@@ -26,4 +26,10 @@ class UserService
             return $user;
         });
     }
+    public function updateUser($request,User $user){
+        return app(TryService::class)(function () use ($request,$user){
+            $user->update($request);
+            return $user;
+        });
+    }
 }
