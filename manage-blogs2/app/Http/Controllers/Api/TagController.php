@@ -27,7 +27,6 @@ class TagController extends Controller
         $result=$this->tagService->getTag();
         return (new ApiResponseBuilder())->data(TagResource::collection($result->data))->response();
     }
-
     /**
      * Store a newly created resource in storage.
      */
