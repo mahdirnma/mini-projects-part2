@@ -8,7 +8,7 @@ class ApiResponseService
     public mixed $data=null;
     public int $statusCode=200;
 
-    public function setMessage(string $message)
+    public function setMessage(string $message) : void
     {
         $this->message = $message;
     }
@@ -18,13 +18,12 @@ class ApiResponseService
     public function setStatusCode(int $statusCode){
         $this->statusCode = $statusCode;
     }
-
     public function response()
     {
         $body=[];
         $this->message!=null && $body['message']=$this->message;
         $this->statusCode!=null && $body['status']=$this->statusCode;
         $this->data!=null && $body['data']=$this->data;
-        return response()->json($this->data,$body['status']);
+        return response()->json($body,$body['status']);
     }
 }

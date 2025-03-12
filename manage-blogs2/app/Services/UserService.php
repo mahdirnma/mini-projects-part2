@@ -12,4 +12,11 @@ class UserService
             return User::where('is_active', 1)->get();
         });
     }
+
+    public function addUser($user)
+    {
+        return app(TryService::class)(function () use ($user){
+            return User::create($user);
+        });
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\ApiResponseBuilder;
@@ -27,9 +28,14 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $result=$this->userService->addUser($request->validated());
+        $apiResult=$result->success?
+            (new ApiResponseBuilder())->message('user added successfully')->data(new UserResource($result->data)):
+            (new ApiResponseBuilder())->message('user added unsuccessfully')->data($result->data);
+        return $apiResult->response();
+
     }
 
     /**

@@ -4,29 +4,29 @@ namespace App\Services;
 
 class ApiResponseBuilder
 {
-    private ApiResponseService $apiResponseService;
+    private ApiResponseService $responseService;
     public function __construct()
     {
-        $this->apiResponseService = new ApiResponseService();
+        $this->responseService = new ApiResponseService();
     }
 
     public function message(string $message)
     {
-        $this->apiResponseService->setMessage($message);
+        $this->responseService->setMessage($message);
         return $this;
     }
     public function data(mixed $data){
-        $this->apiResponseService->setData($data);
+        $this->responseService->setData($data);
         return $this;
     }
 
     public function get()
     {
-        return $this->apiResponseService;
+        return $this->responseService;
     }
 
     public function response()
     {
-        return $this->apiResponseService->response();
+        return $this->responseService->response();
     }
 }
