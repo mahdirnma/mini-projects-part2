@@ -12,5 +12,10 @@ class TagService
             return Tag::where('is_active', 1)->get();
         });
     }
-
+    public function addTag($tag)
+    {
+        return app(TryService::class)(function () use ($tag){
+            return Tag::create($tag);
+        });
+    }
 }
