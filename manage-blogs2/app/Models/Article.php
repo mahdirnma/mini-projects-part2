@@ -29,9 +29,9 @@ class Article extends Model
     public static $rules = [
         'title' => 'required|string|max:255',
         'description' => 'required|string|max:255',
-        'category_id' => 'required|numeric',
-        'user_id' => 'required|numeric',
-        'tag_ids' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'user_id' => 'required|exists:users,id',
+        'tag_ids' => 'required|array',
     ];
 
 }
